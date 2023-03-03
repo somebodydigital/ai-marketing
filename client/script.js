@@ -38,3 +38,21 @@ const generateUniqueId = () => {
 
     return `id-${timeStamp}-${hexadecimalString}`;
 };
+
+const chatStripe = (isAI, value, uniqueID) => {
+    return `
+            <div class="wrapper ${isAI && "ai"}">
+                <div class="chat">
+                    <div class="profile">
+                        <img 
+                            src="${isAI ? bot : user}"
+                            alt="${isAI ? "bot" : "user"}"
+                        />
+                    </div>
+                    <div class="message" id="${uniqueID}">
+                        ${value}
+                    </div>
+                </div>
+            </div>
+        `;
+};
