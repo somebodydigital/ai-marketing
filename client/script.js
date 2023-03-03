@@ -30,3 +30,11 @@ const typeText = (element, text) => {
         }
     }, 20);
 };
+
+const generateUniqueId = () => {
+    const timeStamp = Date.now(),
+        randomNumber = Math.random(),
+        hexadecimalString = randomNumber.toString(16);
+
+    return `id-${timeStamp}-${hexadecimalString}`;
+};
