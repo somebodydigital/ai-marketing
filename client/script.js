@@ -83,7 +83,7 @@ const handleSubmit = async (e) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            prompt: data.get("prompt"),
+            prompt: `${data.get("prompt")}`,
         }),
     });
 
@@ -110,3 +110,5 @@ form.addEventListener("keyup", (e) => {
         handleSubmit(e);
     }
 });
+
+// make an API call to google ads - get data and add to prompt
