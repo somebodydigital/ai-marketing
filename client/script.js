@@ -12,6 +12,8 @@ const passwordProtect = () => {
     }
 };
 
+passwordProtect();
+
 const form = document.querySelector("form"),
     chatContainer = document.querySelector("#chat_container");
 
@@ -60,9 +62,7 @@ const chatStripe = (isAI, value, uniqueID) => {
                             alt="${isAI ? "bot" : "user"}"
                         />
                     </div>
-                    <div class="message" id="${uniqueID}">
-                        ${value}
-                    </div>
+                    <div class="message" id="${uniqueID}">${value}</div>
                 </div>
             </div>
         `;
