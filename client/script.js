@@ -1,6 +1,17 @@
 import bot from "./assets/bot.svg";
 import user from "./assets/user.svg";
 
+const passwordProtect = () => {
+    const password = prompt("Enter password to access");
+
+    if (password !== "tryGpA2BWR4gXKrcMcGs") {
+        alert("Wrong password");
+        passwordProtect();
+    } else {
+        alert("Correct password");
+    }
+};
+
 const form = document.querySelector("form"),
     chatContainer = document.querySelector("#chat_container");
 
@@ -110,5 +121,3 @@ form.addEventListener("keyup", (e) => {
         handleSubmit(e);
     }
 });
-
-// make an API call to google ads - get data and add to prompt
