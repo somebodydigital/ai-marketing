@@ -1,5 +1,28 @@
 <script setup>
 import TheForm from "./components/TheForm.vue";
+
+// create simple authentication
+const passwordProtect = () => {
+    const password = prompt("Enter password to access");
+
+    // set cookie
+    document.cookie = `password=${password}`;
+
+    // if cookie is set, skip password
+    if (document.cookie === "password=tryGpA2BWR4gXKrcMcGs") {
+        return;
+    }
+
+    if (password !== "tryGpA2BWR4gXKrcMcGs") {
+        alert("Wrong password");
+        passwordProtect();
+    } else {
+        alert("Correct password");
+    }
+};
+
+// only run if no password cookie is set
+if (!document.cookie) passwordProtect();
 </script>
 
 <template>
