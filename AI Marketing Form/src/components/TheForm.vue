@@ -6,26 +6,38 @@
                     <form class="w-100" @submit.prevent="onSubmit">
                         <div id="section-1">
                             <div class="mb-3">
+                                <label for="companyName" class="form-label">Campaign Type</label>
+                                <select v-model="campaignType" class="form-select" aria-label="Default select example">
+                                    <option selected>Select a campaign type</option>
+                                    <option value="SEO">SEO</option>
+                                    <option value="CRO">CRO</option>
+                                    <option value="PPC">PPC</option>
+                                </select>
+                                <button type="button" class="btn btn-primary mt-3 w-100" @click="nextForm">Next</button>
+                            </div>
+                        </div>
+                        <div id="section-2" style="display: none">
+                            <div class="mb-3">
                                 <label for="companyName" class="form-label">Company Name</label>
                                 <input type="text" v-model="companyInfo.companyName" class="form-control" id="companyName" />
                                 <button type="button" class="btn btn-primary mt-3 w-100" @click="nextForm">Next</button>
                             </div>
                         </div>
-                        <div id="section-2" style="display: none">
+                        <div id="section-3" style="display: none">
                             <div class="mb-3">
                                 <label for="companyFocus" class="form-label">Industry</label>
                                 <input type="text" v-model="companyInfo.companyFocus" class="form-control" id="companyFocus" />
                                 <button type="button" class="btn btn-primary mt-3 w-100" @click="nextForm">Next</button>
                             </div>
                         </div>
-                        <div id="section-3" style="display: none">
+                        <div id="section-4" style="display: none">
                             <div class="mb-3">
                                 <label for="companyKeywords" class="form-label">Keywords</label>
                                 <input type="text" v-model="companyInfo.companyKeywords" class="form-control" id="companyKeywords" />
                                 <button type="button" class="btn btn-primary mt-3 w-100" @click="nextForm">Next</button>
                             </div>
                         </div>
-                        <div id="section-4" style="display: none">
+                        <div id="section-5" style="display: none">
                             <div class="mb-3">
                                 <!-- render inputted data -->
                                 <p class="text-center">
@@ -39,11 +51,8 @@
                 </div>
                 <div v-else>
                     <h4 class="text-center">Thank you for your submission!</h4>
-                    <div v-if="pending">
+                    <div>
                         <p class="text-center">Your response is pending...</p>
-                    </div>
-                    <div v-else>
-                        <p class="text-center">{{ this.returnedData }}</p>
                     </div>
                 </div>
             </div>
@@ -65,7 +74,10 @@ export default {
             },
             submitted: false,
             pending: true,
-            returnedData: "",
+            returnedData: {
+                step1: "",
+            },
+            campaignType: "Select a campaign type",
         };
     },
     methods: {
@@ -74,6 +86,9 @@ export default {
                 companyFocus: this.companyInfo.companyFocus,
                 companyKeywords: this.companyInfo.companyKeywords,
                 companyName: this.companyInfo.companyName,
+                campaignType: this.campaignType,
+                returnedData: this.returnedData,
+                responsePending: this.pending,
             });
             this.submitted = true;
 
@@ -94,10 +109,11 @@ export default {
             }
 
             if (response.ok) {
+                // update db
                 const data = await response.json(),
                     parsedData = data.bot.trim();
 
-                this.returnedData = parsedData;
+                this.returnedData.step1 = parsedData;
                 this.pending = false;
             } else {
                 const err = await response.text();

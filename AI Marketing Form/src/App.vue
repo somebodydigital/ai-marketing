@@ -1,28 +1,37 @@
-<script setup>
+<script>
 import TheForm from "./components/TheForm.vue";
+import TheDashboard from "./components/TheDashboard.vue";
 
-// create simple authentication
-const passwordProtect = () => {
-    const password = prompt("Enter password to access");
+export default {
+    name: "App",
+    components: {
+        TheForm,
+        TheDashboard,
+    },
+    setup() {
+        // create simple page authentication
+        const passwordProtect = () => {
+            const password = prompt("Enter password to access");
 
-    // set cookie
-    document.cookie = `password=${password}`;
+            // set cookie
+            document.cookie = `password=${password}`;
 
-    // if cookie is set, skip password
-    if (document.cookie === "password=tryGpA2BWR4gXKrcMcGs") {
-        return;
-    }
+            // if cookie is set, skip password
+            if (document.cookie === "password=tryGpA2BWR4gXKrcMcGs") {
+                return;
+            }
 
-    if (password !== "tryGpA2BWR4gXKrcMcGs") {
-        alert("Wrong password");
-        passwordProtect();
-    } else {
-        alert("Correct password");
-    }
+            if (password !== "tryGpA2BWR4gXKrcMcGs") {
+                alert("Wrong password");
+                passwordProtect();
+            } else {
+                alert("Correct password");
+            }
+        };
+        // only run if no password cookie is set
+        if (!document.cookie) passwordProtect();
+    },
 };
-
-// only run if no password cookie is set
-if (!document.cookie) passwordProtect();
 </script>
 
 <template>
@@ -31,6 +40,7 @@ if (!document.cookie) passwordProtect();
     </header>
 
     <main>
+        <TheDashboard />
         <TheForm />
     </main>
 </template>
