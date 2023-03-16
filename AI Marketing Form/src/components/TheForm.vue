@@ -113,6 +113,8 @@ export default {
                 const data = await response.json(),
                     parsedData = data.bot.trim();
 
+                console.log(parsedData);
+
                 this.returnedData.step1 = parsedData;
                 this.pending = false;
             } else {
