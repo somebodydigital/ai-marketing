@@ -40,7 +40,7 @@ export default {
     </header>
 
     <main>
-        <TheDashboard />
+        <!-- <TheDashboard /> -->
         <TheForm />
     </main>
 </template>
