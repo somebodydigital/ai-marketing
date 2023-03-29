@@ -1,6 +1,6 @@
 <script>
 import TheForm from "./components/TheForm.vue";
-import TheDashboard from "./components/TheDashboard.vue";
+import TheDashboard from "./components/TheDatabase.vue";
 
 export default {
     name: "App",
@@ -36,12 +36,38 @@ export default {
 
 <template>
     <header>
-        <img alt="Vue logo" class="logo" src="./assets/logo.png" />
+        <nav class="navbar navbar-expand-lg w-100">
+            <img alt="Vue logo" class="logo" src="./assets/logo.png" />
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <router-link to="/" class="nav-link">Dashboard</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/onboarding" class="nav-link">Onboarding</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/database" class="nav-link">Database</router-link>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
     <main>
-        <!-- <TheDashboard /> -->
-        <TheForm />
+        <RouterView />
     </main>
 </template>
 
@@ -55,17 +81,11 @@ header {
     display: block;
     margin: 0 auto;
 }
-
-@media (min-width: 1024px) {
-    header {
-        display: flex;
-        place-items: center;
-    }
-
-    header .wrapper {
-        display: flex;
-        place-items: flex-start;
-        flex-wrap: wrap;
-    }
+.nav-link {
+    color: #fff;
+}
+.nav-link:hover {
+    background: transparent;
+    color: #ccc;
 }
 </style>
